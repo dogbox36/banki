@@ -1,11 +1,12 @@
 package hu.petrik.banki_szolgaltatasok;
 
-public abstract class MegtakaritasiSzamla  extends BankiSzolgaltatas{
+public class MegtakaritasiSzamla extends Szamla {
     private double kamat;
-    public double alapKamat;
+    public static double alapKamat = 1.01;
 
-    public MegtakaritasiSzamla(Tulajdonos tulajdonos) {
+    MegtakaritasiSzamla(Tulajdonos tulajdonos) {
         super(tulajdonos);
+        kamat = alapKamat;
     }
 
     public double getKamat() {
@@ -15,8 +16,17 @@ public abstract class MegtakaritasiSzamla  extends BankiSzolgaltatas{
     public void setKamat(double kamat) {
         this.kamat = kamat;
     }
-    public abstract boolean  kivesz(int osszeg);
-    public  void kamatJovairas(){
 
-    };
+    @Override
+    public boolean kivesz(int osszeg) {
+        if (aktualisEgyenleg - osszeg < 0)
+            return false;
+
+        aktualisEgyenleg -= osszeg;
+        return true;
+    }
+
+    public void kamatJovairas() {
+        aktualisEgyenleg *= kamat;
+    }
 }

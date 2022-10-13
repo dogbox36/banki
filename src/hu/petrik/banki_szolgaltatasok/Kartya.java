@@ -1,26 +1,20 @@
 package hu.petrik.banki_szolgaltatasok;
 
-public abstract class Kartya extends BankiSzolgaltatas{
+public class Kartya extends BankiSzolgaltatas {
     private Szamla szamla;
-    private String Kartyaszam;
+    private String kartyaSzam;
 
-    public Kartya(Tulajdonos tulajdonos) {
-        super(tulajdonos);
-    }
-
-    public Kartya(Tulajdonos tulajdonos, Szamla szamla) {
+    Kartya(Tulajdonos tulajdonos, Szamla szamla, String kartyaSzam) {
         super(tulajdonos);
         this.szamla = szamla;
+        this.kartyaSzam = kartyaSzam;
     }
 
-    public Kartya(Tulajdonos tulajdonos, String kartyaszam) {
-        super(tulajdonos);
-        Kartyaszam = kartyaszam;
+    public String getKartyaSzam() {
+        return kartyaSzam;
     }
 
-    public String getKartyaszam() {
-        return Kartyaszam;
+    public boolean vasarlas(int osszeg) {
+        return szamla.kivesz(osszeg);
     }
-
-    public abstract boolean  vasarlas(int osszeg);
 }
